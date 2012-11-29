@@ -1,0 +1,39 @@
+project:
+  project_name: ldapcluster
+
+  security groups:
+    default:
+      - protocol: tcp
+        from port: 22
+      - protocol: icmp
+    web:
+      - protocol: tcp
+        from port: 80
+      - protocol: tcp
+        from port: 443
+      - protocol: tcp
+        from port: 8000
+        to port: 9000
+    ldap:
+      - protocol: tcp
+        from port: 389
+      - protocol: tcp
+        from port: 636
+
+  instances:
+    default:
+      image: ubuntu-precise-x86_64
+      flavor: m1.small
+      security groups:
+        - default
+      userdata: userdata/common
+    ldapserver:
+      security groups:
+        - default
+        - ldap
+    webserver:
+      security groups:
+        - default
+        - web
+    client:
+

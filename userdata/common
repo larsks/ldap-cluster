@@ -1,0 +1,26 @@
+#cloud-config-archive
+- type: text/cloud-config
+  content: |
+    apt_upgrade: true
+    packages:
+    - puppet
+    - git-core
+    - ruby-json
+    puppet_ecn:
+      parameters:
+        drifter_project: {{ project.config.project_name }}
+        drifter_user: {{ project.config.os_username }}
+        drifter_instance: {{ instance.name }}
+- type: text/x-shellscript
+  content: |
+    #!/bin/sh
+    git clone git://github.com/larsks/cloud-init-ecn.git /var/lib/cloud-init-ecn
+    git clone git://github.com/larsks/ldap-cluster.git /var/lib/drifter
+- type: text/x-shellscript
+  content: |
+    #!/bin/sh
+    cd /var/lib/drifter
+    puppet apply --node_terminus=exec \
+      --external_nodes=/var/lib/cloud-init-ecn/cloud-init-ecn.py \
+      --modulepath=puppet/modules puppet/site.pp
+
