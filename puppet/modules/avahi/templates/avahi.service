@@ -1,0 +1,8 @@
+<service-group>
+	<name><%= service_name %></name>
+	<service protocol="ipv4">
+		<type><%= service_type %></type>
+		<port><%= service_port %></port>
+	</service>
+</service-group>
+
