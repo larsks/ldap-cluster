@@ -6,5 +6,11 @@ class role::ldapserver {
     service_type => '_ldap._tcp',
     service_port => '389',
   }
+
+  file { '/etc/ldap/data':
+    ensure  => directory,
+    source  => 'puppet:///modules/role/ldapserver/data',
+    recurse => true,
+  }
 }
 

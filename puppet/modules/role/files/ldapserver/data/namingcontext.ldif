@@ -1,0 +1,12 @@
+dn: dc=seas,dc=harvard,dc=edu
+objectclass: domain
+dc: seas
+
+dn: ou=people,dc=seas,dc=harvard,dc=edu
+objectclass: organizationalunit
+ou: people
+
+dn: ou=groups,dc=seas,dc=harvard,dc=edu
+objectclass: organizationalunit
+ou: groups
+
