@@ -3,7 +3,7 @@ class ldap::server {
 
   $packages = [ 'slapd' ]
 
-  packages { $packages:
+  package { $packages:
     ensure => installed,
   }
 
