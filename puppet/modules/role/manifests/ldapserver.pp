@@ -12,5 +12,20 @@ class role::ldapserver {
     source  => 'puppet:///modules/role/ldapserver/data',
     recurse => true,
   }
+
+  file { '/var/lib/ldap/seas':
+    ensure => directory,
+    owner  => openldap,
+    group  => openldap,
+    mode   => 0700,
+  }
+
+  exec { 'initialize seas database':
+    command => '/usr/bin/ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/data/db.ldif',
+    creates => '/var/lib/ldap/seas/DB_CONFIG',
+    require => [
+      File['/etc/ldap/data'],
+      File['/var/lib/ldap/seas'],
+    ]
 }
 
