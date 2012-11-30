@@ -27,5 +27,6 @@ class role::ldapserver {
       File['/etc/ldap/data'],
       File['/var/lib/ldap/seas'],
     ]
+  }
 }
 
