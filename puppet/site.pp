@@ -2,11 +2,11 @@ node basenode {
   include role::base
 }
 
-node webserver {
+node webserver inherits basenode {
   include role::webserver
 }
 
-node ldapserver {
+node ldapserver inherits basenode {
   include role::ldapserver
 }
 
