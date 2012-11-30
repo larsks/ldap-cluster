@@ -28,5 +28,11 @@ class role::ldapserver {
       File['/var/lib/ldap/seas'],
     ]
   }
+
+  exec { 'create seas naming context':
+    command => '/usr/bin/ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/data/namingcontext.ldif',
+    require => Exec['initialize seas database'],
+    unless  => '/usr/bin/ldapsearch -Y EXTERNAL -H ldapi:/// -b dc=seas,dc=harvard,dc=edu -s base',
+  }
 }
 

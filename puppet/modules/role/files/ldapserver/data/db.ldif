@@ -4,18 +4,18 @@ objectClass: olcHdbConfig
 olcDatabase: hdb
 olcDbDirectory: /var/lib/ldap/seas
 olcSuffix: dc=seas,dc=harvard,dc=edu
+olcAccess: to *
+  by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth write
+  by dn="cn=root,dc=seas,dc=harvard,dc=edu" write
+  by * break
+olcAccess: to dn.base=""
+  by * read
 olcAccess: to attrs=userPassword,shadowLastChange
   by self write
   by anonymous auth
-  by dn="cn=admin,dc=novalocal" write
-  by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external write
   by * none
-olcAccess: to dn.base=""
-  by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external write
-  by * read
 olcAccess: to *
-  by self write by dn="cn=root,dc=seas,dc=harvard,dc=edu" write
-  by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external write
+  by self write
   by * read
 olcLastMod: TRUE
 olcRootDN: cn=root,dc=seas,dc=harvard,dc=edu
