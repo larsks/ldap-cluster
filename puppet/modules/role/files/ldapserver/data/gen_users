@@ -1,0 +1,26 @@
+#!/bin/sh
+
+for i in {1..10}; do
+
+	name=$(printf "testuser%02d" $i)
+	uidNumber=$(( 1000 + $i ))
+
+cat <<EOF
+dn: cn=$name,ou=groups,dc=seas,dc=harvard,dc=edu
+objectclass: posixGroup
+cn: $name
+gidNumber: $uidNumber
+
+dn: cn=$name,ou=people,dc=seas,dc=harvard,dc=edu
+objectclass: inetOrgPerson
+objectclass: posixAccount
+cn: $name
+uid: $name
+uidNumber: $uidNumber
+gidNumber: $uidNumber
+homeDirectory: /home/$name
+loginShell: /bin/bash
+
+EOF
+done
+
