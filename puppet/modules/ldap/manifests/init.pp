@@ -1,11 +1,4 @@
 class ldap {
-  $packages = [
-    'ldap-utils',
-    'ldapvi',
-  ]
-
-  package { $packages:
-    ensure => installed,
-  }
+  include ldap::utils
 }
 
