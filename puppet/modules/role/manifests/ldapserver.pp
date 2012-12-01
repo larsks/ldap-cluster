@@ -1,6 +1,6 @@
 class role::ldapserver {
-  include avahi
-  include ldap::server
+  require avahi
+  require ldap::server
 
   avahi::service { 'ldap':
     service_type => '_ldap._tcp',
